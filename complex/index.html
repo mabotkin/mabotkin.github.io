@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Complex Mapping</title>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+		<script src="js/complex.min.js"></script>
+		<script src="js/jscolor.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<center>
+			<h1>Complex Mapping Visualizer</h1>
+			<div id="wrapper">
+				<div id="zPlaneDiv"><h2>z Plane</h2></div>	
+				<div id="wPlaneDiv"><h2>w Plane</h2></div>
+			</div>
+			f(z) = <select id="mapping" onchange="mapUpdate()">
+				<option value="z" selected="selected">z</option>
+				<option value="3z">3z</option>
+				<option value="iz">iz</option>
+				<option value="z^2">z^2</option>
+				<option value="z^i">z^i</option>
+				<option value="Sqrt(z)">Sqrt(z)</option>
+				<option value="Exp(z)">Exp(z)</option>
+				<option value="Exp(iz)">Exp(iz)</option>
+				<option value="Log(z)">Log(z)</option>
+				<option value="Conj(z)">Conj(z)</option>
+				<option value="Sin(z)">Sin(z)</option>
+				<option value="Cos(z)">Cos(z)</option>
+				<option value="1/z">1/z</option>
+			</select>
+			<br>
+			<button onclick="clearCanvas()">Clear</button>
+			<br>
+			Color: <input class="jscolor" onchange="updateColor(this.jscolor)" value="FF0000" size=4>
+			<br>
+			<br>
+			Range Settings:
+			<br>
+			Z Plane:<br>
+			Max X:<input type="text" id="ZMAXX" value="2" size=4><br>
+			Min X:<input type="text" id="ZMINX" value="-2" size=4><br>
+			Max Y:<input type="text" id="ZMAXY" value="2" size=4><br>
+			Min Y:<input type="text" id="ZMINY" value="-2" size=4><br>
+			W Plane:<br>
+			Max X:<input type="text" id="WMAXX" value="2" size=4><br>
+			Min X:<input type="text" id="WMINX" value="-2" size=4><br>
+			Max Y:<input type="text" id="WMAXY" value="2" size=4><br>
+			Min Y:<input type="text" id="WMINY" value="-2" size=4><br>
+			<button onclick="updateRange()">Update Range</button><br>
+			<button onclick="resetRange()">Reset Range</button>
+		</center>
+		<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>
