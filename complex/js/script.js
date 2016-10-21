@@ -8,16 +8,9 @@ var W_MAX_Y = 2;
 var W_MIN_Y = -2;
 var STROKEWIDTH = 5;
 var AXISWIDTH = 1;
+var BRANCH_CUT_THRESHHOLD = 10;
 //
-var FRAMESIZE = 800;
-if(window.innerWidth <= 1366)
-{
-	FRAMESIZE = 550;
-}
-else if(window.innerWidth <= 1600)
-{
-	FRAMESIZE = 660;
-}
+var FRAMESIZE = Math.round(Math.min(window.innerHeight*(0.8),window.innerWidth*(0.4)));
 //
 var STROKECOLOR = "#FF0000";
 // z plane canvas
@@ -73,6 +66,11 @@ function addClick(x, y, dragging)
 	clickY.push(y);
 	clickColor.push(STROKECOLOR);
 	clickDrag.push(dragging);
+}
+
+function distance(x1,y1,x2,y2)
+{
+	return Math.sqrt(Math.pow((y2-y1),2) + Math.pow((x2-x1),2));
 }
 
 function updateColor(jscolor)
@@ -198,6 +196,28 @@ function clearCanvas()
 	redraw();
 }
 
+function updateBCT()
+{
+	var newBCT = parseFloat(document.getElementById("bct").value);
+	if(!isNaN(newBCT) && newBCT > 1)
+	{
+		BRANCH_CUT_THRESHHOLD = newBCT;
+		document.getElementById("bct").value = newBCT;
+	}
+	else
+	{
+		document.getElementById("bct").value = 10;
+	}
+	redraw();
+}
+
+function resetBCT()
+{
+	BRANCH_CUT_THRESHHOLD = 10;
+	document.getElementById("bct").value = 10;
+	redraw();
+}
+
 function resetRange()
 {
 	document.getElementById("ZMAXX").value = 2;
@@ -216,6 +236,7 @@ function resetRange()
 	W_MIN_X = -2;
 	W_MAX_Y = 2;
 	W_MIN_Y = -2;
+	redraw();
 }
 
 function updateRange()
@@ -392,7 +413,10 @@ function wMap()
 			wContext.beginPath();
 			if(clickDrag[i])
 			{
-				wContext.moveTo(prevx, prevy);
+				if((distance(out_x,out_y,prevx,prevy)/distance(clickX[i-1],clickY[i-1],clickX[i],clickY[i]))<BRANCH_CUT_THRESHHOLD)
+					wContext.moveTo(prevx, prevy);
+				else
+					wContext.moveTo(out_x, out_y);
 			}
 			else
 			{
