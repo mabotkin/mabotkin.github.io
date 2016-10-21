@@ -9,26 +9,14 @@
 	<body>
 		<center>
 			<h1>Complex Mapping Visualizer</h1>
+			<a href="https://github.com/mabotkin/complex-map"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 			<div id="wrapper">
 				<div id="zPlaneDiv"><h2>z Plane</h2></div>	
 				<div id="wPlaneDiv"><h2>w Plane</h2></div>
 			</div>
-			f(z) = <select id="mapping" onchange="mapUpdate()">
-				<option value="z" selected="selected">z</option>
-				<option value="3z">3z</option>
-				<option value="iz">iz</option>
-				<option value="z^2">z^2</option>
-				<option value="z^i">z^i</option>
-				<option value="Sqrt(z)">Sqrt(z)</option>
-				<option value="Exp(z)">Exp(z)</option>
-				<option value="Exp(iz)">Exp(iz)</option>
-				<option value="Log(z)">Log(z)</option>
-				<option value="Conj(z)">Conj(z)</option>
-				<option value="Sin(z)">Sin(z)</option>
-				<option value="Cos(z)">Cos(z)</option>
-				<option value="1/z">1/z</option>
-			</select>
-			<br>
+			f(z) = <input type=text id=mapping size=6i value="z"><br>
+			<button onclick="mapUpdate()">Set Map</button>
+			<br><br>
 			<button onclick="clearCanvas()">Clear</button>
 			<br>
 			Color: <input class="jscolor" onchange="updateColor(this.jscolor)" value="FF0000" size=4>
